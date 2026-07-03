@@ -5,6 +5,15 @@
 RegisterNUICallback('shutdownLoadingScreenNui', function(_, cb)
     ShutdownLoadingScreen()
     ShutdownLoadingScreenNui()
+
+    -- ShutdownLoadingScreen() beendet nur den internen Ladezustand, es faded den
+    -- Bildschirm NICHT wieder ein. Der Screen wurde beim Verbinden auf schwarz gefaded
+    -- (DoScreenFadeOut) - ohne diesen expliziten Fade-In bleibt die Spielwelt dauerhaft
+    -- schwarz, waehrend NUI-HUDs (die vom Screen-Fade unabhaengig sind) normal weiterlaufen.
+    if IsScreenFadedOut() then
+        DoScreenFadeIn(500)
+    end
+
     cb({})
 end)
 

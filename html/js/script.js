@@ -37,7 +37,13 @@ window.addEventListener('message', (event) => {
 
             document.body.classList.add('fade-out');
             setTimeout(() => {
-                fetch('https://loadingScreen/shutdownLoadingScreenNui', {
+                // Muss der tatsaechliche Resource-Name sein (server.cfg: "fivem-loading-screen"),
+                // sonst landet der Callback nirgends und ShutdownLoadingScreen() wird nie aufgerufen -
+                // der Spieler haengt nach dem Spawn auf schwarzem Bild fest.
+                const resourceName = typeof GetParentResourceName === 'function'
+                    ? GetParentResourceName()
+                    : 'fivem-loading-screen';
+                fetch(`https://${resourceName}/shutdownLoadingScreenNui`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                     body: '{}'

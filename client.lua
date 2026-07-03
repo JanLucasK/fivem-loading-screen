@@ -7,3 +7,16 @@ RegisterNUICallback('shutdownLoadingScreenNui', function(_, cb)
     ShutdownLoadingScreenNui()
     cb({})
 end)
+
+-- Die Ladebildschirm-HTML wartet auf ein 'shutdownLoadingScreen' postMessage-Event,
+-- bevor sie ausfadet und obigen Callback ausloest. FiveM schickt dieses Event aber nie
+-- von selbst - es muss per SendLoadingScreenMessage() aktiv an die NUI geschickt werden,
+-- sobald der Spieler wirklich im Spiel aktiv ist. Ohne diesen Trigger wartet script.js
+-- fuer immer und der Spieler bleibt nach dem Verbinden auf schwarzem Bild haengen.
+CreateThread(function()
+    while not NetworkIsPlayerActive(PlayerId()) do
+        Wait(0)
+    end
+
+    SendLoadingScreenMessage(json.encode({ eventName = 'shutdownLoadingScreen' }))
+end)

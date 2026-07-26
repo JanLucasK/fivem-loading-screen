@@ -55,19 +55,36 @@ html, body {
     justify-content: center;
 }
 
-.logo {
-    font-size: 5.5rem;
+.logo-mark {
+    width: 220px;
+    max-width: 22vh;
+    height: auto;
+    display: block;
+    /* Ersetzt den frueheren Textglow: liegt als Filter auf der Grafik, damit sowohl das
+       PNG-Original als auch der SVG-Fallback denselben Schein bekommen. */
+    filter: drop-shadow(0 0 34px rgba(212, 175, 55, 0.35));
+    animation: logoIn 0.9s ease-out both;
+}
+
+@keyframes logoIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.96); }
+    to   { opacity: 1; transform: none; }
+}
+
+.wordmark {
+    margin-top: 22px;
+    font-size: 3rem;
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
     text-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
 }
 
-.logo-neo {
+.wordmark-neo {
     color: #ffffff;
 }
 
-.logo-v {
+.wordmark-v {
     color: var(--gold);
 }
 

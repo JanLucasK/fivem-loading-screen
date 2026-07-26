@@ -13,7 +13,7 @@ window.addEventListener('message', (event) => {
 
     switch (data.eventName) {
         case 'beginMap':
-            statusText.textContent = 'Loading ' + (data.data || 'world') + '...';
+            statusText.textContent = 'Lade ' + (data.data || 'Welt') + ' ...';
             break;
 
         case 'loadProgress':
@@ -21,11 +21,11 @@ window.addEventListener('message', (event) => {
             break;
 
         case 'onScriptConnecting':
-            statusText.textContent = 'Connecting...';
+            statusText.textContent = 'Verbindung wird hergestellt ...';
             break;
 
         case 'onScriptConnected':
-            statusText.textContent = 'Connected';
+            statusText.textContent = 'Verbunden';
             break;
 
         // Fired when the loading screen is allowed to close.
@@ -33,7 +33,7 @@ window.addEventListener('message', (event) => {
         // so we can fade out smoothly before handing control to the game.
         case 'shutdownLoadingScreen':
             setProgress(1);
-            statusText.textContent = 'Ready';
+            statusText.textContent = 'Bereit';
 
             document.body.classList.add('fade-out');
             setTimeout(() => {

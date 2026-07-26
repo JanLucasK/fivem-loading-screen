@@ -22,16 +22,28 @@ fivem-loading-screen/
 └── html/
     ├── index.html
     ├── css/style.css
+    ├── img/logo.svg
     └── js/script.js
 ```
 
+## Logo
+
+The screen loads `html/img/logo.png` first and falls back to the vector
+`html/img/logo.svg` when that file is absent, so the mark is never missing.
+
+To use the original render, drop the file in as `html/img/logo.png` — no code
+change needed, it is already covered by the `files` table in
+[fxmanifest.lua](fxmanifest.lua). Recommended: square PNG with transparency,
+around 512×512 px.
+
 ## Customization
 
+- Language: all player-facing strings are German — the markup in
+  [html/index.html](html/index.html) and the status texts in
+  [html/js/script.js](html/js/script.js).
 - Colors: edit the `--gold` / `--black` variables in [html/css/style.css](html/css/style.css).
-- Server name: edit the `.logo` markup in [html/index.html](html/index.html).
-- Background image / logo image: drop assets into `html/img/` and reference
-  them in the CSS/HTML, then add the file(s) to the `files` table in
-  [fxmanifest.lua](fxmanifest.lua).
+- Server name: edit the `.wordmark` markup in [html/index.html](html/index.html).
+- Logo size: `.logo-mark` in [html/css/style.css](html/css/style.css).
 
 ## How it works
 

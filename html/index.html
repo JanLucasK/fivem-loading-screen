@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>NeoV - Loading</title>
+    <title>NeoV - Ladebildschirm</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="background"></div>
 
     <div class="container">
-        <div class="logo">
-            <span class="logo-neo">Neo</span><span class="logo-v">V</span>
+        <!-- Bevorzugt das Original-Logo (img/logo.png). Solange die Datei nicht abgelegt
+             ist, greift der Vektor-Nachbau, damit der Screen nie ohne Marke laedt. -->
+        <img class="logo-mark" src="img/logo.png" alt="NeoV"
+             onerror="this.onerror = null; this.src = 'img/logo.svg';">
+        <div class="wordmark">
+            <span class="wordmark-neo">Neo</span><span class="wordmark-v">V</span>
         </div>
-        <div class="tagline">Loading into the city...</div>
+        <div class="tagline">Los Santos wartet auf dich</div>
 
         <div class="progress-wrap">
             <div class="progress-bar">
@@ -21,7 +25,7 @@
             <div class="progress-label" id="progress-label">0%</div>
         </div>
 
-        <div class="status" id="status-text">Initializing...</div>
+        <div class="status" id="status-text">Wird initialisiert ...</div>
     </div>
 
     <div class="footer">NeoV Roleplay</div>

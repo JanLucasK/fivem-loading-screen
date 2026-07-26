@@ -22,22 +22,25 @@ fivem-loading-screen/
 └── html/
     ├── index.html
     ├── css/style.css
+    ├── img/logo.png
     └── js/script.js
 ```
 
 ## Logo
 
-The NeoV mark is an inline `<svg class="logo-mark">` inside
-[html/index.html](html/index.html) — deliberately not an external image file.
-An external file would first have to be served through the `files` table, and
-that is exactly where the mark fails silently (404, no visible error). Inline,
-it is part of the document and cannot go missing.
+`html/img/logo.png` is the original NeoV render, cropped to the mark and cut
+out — the black backdrop of the source render was keyed out by luminance, so
+the mark carries its own alpha and sits on the page background instead of on a
+black box. 512×512, square.
 
-It is drawn as two copies of the same silhouette: one offset behind it in near
-black for the extruded depth, one in front with the brass gradient.
+The file has to be listed in the `files` table in
+[fxmanifest.lua](fxmanifest.lua). Without that entry the client 404s and the
+screen loads without a logo and without any visible error — worth checking
+first if the mark ever goes missing.
 
 - Size: `.logo-mark` in [html/css/style.css](html/css/style.css).
-- Colors: the `neovGold` / `neovDepth` gradient stops in the SVG.
+- The gold glow around it is a `drop-shadow()` filter on the same rule; it
+  follows the alpha channel, so it hugs the silhouette rather than a box.
 
 ## Customization
 

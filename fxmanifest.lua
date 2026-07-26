@@ -14,5 +14,7 @@ files {
     'html/index.html',
     'html/css/style.css',
     'html/js/script.js',
-    -- Kein Logo-Eintrag noetig: die Bildmarke steckt als inline-SVG in index.html.
+    -- Bildmarke. Bewusst als exakter Pfad statt als Glob: faellt der Eintrag weg oder
+    -- greift das Muster nicht, laedt der Screen ohne Logo und ohne sichtbaren Fehler.
+    'html/img/logo.png',
 }

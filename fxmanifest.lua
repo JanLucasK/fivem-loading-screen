@@ -14,8 +14,5 @@ files {
     'html/index.html',
     'html/css/style.css',
     'html/js/script.js',
-    -- Logo: index.html laedt zuerst img/logo.png und faellt auf img/logo.svg zurueck.
-    -- Beide muessen hier gelistet sein, sonst liefert der Client 404 und die Marke fehlt.
-    'html/img/*.png',
-    'html/img/*.svg',
+    -- Kein Logo-Eintrag noetig: die Bildmarke steckt als inline-SVG in index.html.
 }

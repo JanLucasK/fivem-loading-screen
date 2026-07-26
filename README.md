@@ -22,19 +22,22 @@ fivem-loading-screen/
 └── html/
     ├── index.html
     ├── css/style.css
-    ├── img/logo.svg
     └── js/script.js
 ```
 
 ## Logo
 
-The screen loads `html/img/logo.png` first and falls back to the vector
-`html/img/logo.svg` when that file is absent, so the mark is never missing.
+The NeoV mark is an inline `<svg class="logo-mark">` inside
+[html/index.html](html/index.html) — deliberately not an external image file.
+An external file would first have to be served through the `files` table, and
+that is exactly where the mark fails silently (404, no visible error). Inline,
+it is part of the document and cannot go missing.
 
-To use the original render, drop the file in as `html/img/logo.png` — no code
-change needed, it is already covered by the `files` table in
-[fxmanifest.lua](fxmanifest.lua). Recommended: square PNG with transparency,
-around 512×512 px.
+It is drawn as two copies of the same silhouette: one offset behind it in near
+black for the extruded depth, one in front with the brass gradient.
+
+- Size: `.logo-mark` in [html/css/style.css](html/css/style.css).
+- Colors: the `neovGold` / `neovDepth` gradient stops in the SVG.
 
 ## Customization
 
@@ -42,8 +45,6 @@ around 512×512 px.
   [html/index.html](html/index.html) and the status texts in
   [html/js/script.js](html/js/script.js).
 - Colors: edit the `--gold` / `--black` variables in [html/css/style.css](html/css/style.css).
-- Server name: edit the `.wordmark` markup in [html/index.html](html/index.html).
-- Logo size: `.logo-mark` in [html/css/style.css](html/css/style.css).
 
 ## How it works
 

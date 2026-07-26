@@ -56,12 +56,11 @@ html, body {
 }
 
 .logo-mark {
-    width: 220px;
-    max-width: 22vh;
+    width: 260px;
+    max-width: 34vh;
     height: auto;
     display: block;
-    /* Ersetzt den frueheren Textglow: liegt als Filter auf der Grafik, damit sowohl das
-       PNG-Original als auch der SVG-Fallback denselben Schein bekommen. */
+    /* Ersetzt den frueheren Textglow der Wortmarke - liegt als Filter auf der Grafik. */
     filter: drop-shadow(0 0 34px rgba(212, 175, 55, 0.35));
     animation: logoIn 0.9s ease-out both;
 }
@@ -71,25 +70,8 @@ html, body {
     to   { opacity: 1; transform: none; }
 }
 
-.wordmark {
-    margin-top: 22px;
-    font-size: 3rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    text-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
-}
-
-.wordmark-neo {
-    color: #ffffff;
-}
-
-.wordmark-v {
-    color: var(--gold);
-}
-
 .tagline {
-    margin-top: 8px;
+    margin-top: 26px;
     font-size: 1.1rem;
     font-weight: 500;
     letter-spacing: 3px;

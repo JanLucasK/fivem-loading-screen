@@ -19,28 +19,40 @@ progress bar while assets stream in.
 ```
 fivem-loading-screen/
 ├── fxmanifest.lua
+├── assets/logo.png       # Quelle, wird nicht ausgeliefert
 └── html/
-    ├── index.html
+    ├── index.html        # enthaelt das Logo als data:-URI
     ├── css/style.css
-    ├── img/logo.png
     └── js/script.js
 ```
 
 ## Logo
 
-`html/img/logo.png` is the original NeoV render, cropped to the mark and cut
-out — the black backdrop of the source render was keyed out by luminance, so
-the mark carries its own alpha and sits on the page background instead of on a
-black box. 512×512, square.
+Die Marke ist als `data:image/png;base64,…` direkt in das `<img class="logo-mark">`
+in [html/index.html](html/index.html) eingebettet — **bewusst keine eigene Datei.**
 
-The file has to be listed in the `files` table in
-[fxmanifest.lua](fxmanifest.lua). Without that entry the client 404s and the
-screen loads without a logo and without any visible error — worth checking
-first if the mark ever goes missing.
+Als eigene Datei kam sie nie beim Client an. Sie lag korrekt unter `html/img/`,
+war lesbar, stand in der `files`-Tabelle und die Resource war neu gestartet —
+der Server hat die Bytes trotzdem nicht in `cache/files/…/resource.rpf` gepackt
+(Paket blieb 20 KB, null PNG-Signaturen darin, nur der Dateiname). Im Spiel gab
+das ein Broken-Image ohne jede Fehlermeldung, server- wie clientseitig.
+Eingebettet gibt es keine Datei mehr, die fehlen kann, und keinen
+`files`-Eintrag, der falsch sein kann.
 
-- Size: `.logo-mark` in [html/css/style.css](html/css/style.css).
-- The gold glow around it is a `drop-shadow()` filter on the same rule; it
-  follows the alpha channel, so it hugs the silhouette rather than a box.
+`assets/logo.png` ist die Quelle (384×384, freigestellt — der schwarze
+Hintergrund des Original-Renders wurde per Luminanz ausgekeyt, das Logo bringt
+sein eigenes Alpha mit). Sie steht bewusst ausserhalb von `html/` und wird
+nicht ausgeliefert.
+
+Nach dem Austausch neu einbetten:
+
+```
+node -e "const fs=require('fs');const b='data:image/png;base64,'+fs.readFileSync('assets/logo.png').toString('base64');const f='html/index.html';fs.writeFileSync(f,fs.readFileSync(f,'utf8').replace(/src=\"data:image\/png;base64,[^\"]*\"/,'src=\"'+b+'\"'))"
+```
+
+- Größe: `.logo-mark` in [html/css/style.css](html/css/style.css).
+- Der Goldschein ist ein `drop-shadow()` auf derselben Regel; er folgt dem
+  Alphakanal und legt sich damit um die Silhouette statt um einen Kasten.
 
 ## Customization
 

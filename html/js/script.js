@@ -44,7 +44,7 @@
   const safeHomepage = mediaPath(config.homepage);
   if (safeHomepage) $('.brand').href = safeHomepage;
 
-  const socials = Array.isArray(config.socials) ? config.socials : [];
+  const socials = [...(safeHomepage ? [{ label: 'Homepage', url: safeHomepage }] : []), ...(Array.isArray(config.socials) ? config.socials : [])];
   socials.filter(item => item && typeof item.label === 'string').forEach(item => {
     const placeholder = item.url === '#';
     let url = placeholder ? '#' : '';
@@ -59,12 +59,14 @@
     const arrow = element('span', 'social-arrow', url ? '↗' : '');
     arrow.setAttribute('aria-hidden', 'true');
     top.append(arrow);
-    link.append(top, element('span', 'social-description', item.description || ''));
+    link.append(top);
     if (url) {
       link.href = url;
       if (placeholder) {
         link.addEventListener('click', event => event.preventDefault());
         link.setAttribute('aria-label', `${item.label} (Platzhalter)`);
+        link.setAttribute('aria-disabled', 'true');
+        link.classList.add('is-unconfigured');
       } else {
         link.target = '_blank';
         link.rel = 'noopener noreferrer';

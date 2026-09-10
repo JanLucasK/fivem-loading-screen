@@ -13,6 +13,7 @@ client_script 'client.lua'
 
 files {
     'html/index.html',
+    'assets/neologokompakt.png',
     'html/css/*.css',
     'html/js/*.js',
     'html/fonts/*.woff2',

@@ -13,13 +13,12 @@
   <div class="ambient" aria-hidden="true"></div>
   <div class="screen">
     <header class="masthead">
-      <a class="brand" href="https://neov.makeitclever.de" target="_blank" rel="noopener noreferrer" aria-label="NEO V Homepage"><span class="brand-mark"></span><span>NEO <span class="gold">V</span></span><span class="brand-caption">ROLEPLAY<br>OHNE KOMPROMISSE.</span></a>
-      <div class="connection"><span class="status-dot"></span><span id="connection-label">VERBINDUNG WIRD AUFGEBAUT</span></div>
-      <span class="edition">LOS SANTOS, DEINE GESCHICHTE.</span><span id="preview-label" hidden>VORSCHAU</span>
+      <a class="brand" href="https://neov.makeitclever.de" target="_blank" rel="noopener noreferrer" aria-label="NEO V Homepage"><img class="brand-logo" src="../assets/neologokompakt.png" alt="NEO V Roleplay"></a>
+      <span id="connection-label" class="sr-only" role="status">VERBINDUNG WIRD AUFGEBAUT</span><span id="preview-label" hidden>VORSCHAU</span>
     </header>
     <main class="layout">
       <section class="identity" aria-label="Verbindungsfortschritt">
-        <div class="welcome"><span class="eyebrow">DU BIST GLEICH DA.</span><h1>Eine Stadt.<br>Deine Geschichte.</h1></div>
+        <div class="loading-headspace" aria-hidden="true"></div>
         <div class="portal" aria-hidden="true">
           <div class="portal-halo"></div>
           <div class="portal-media"><img id="portal-image" src="media/life-city.jpg" alt=""><video id="portal-video" muted autoplay loop playsinline preload="none" hidden></video></div>
@@ -38,19 +37,18 @@
 </svg>
         </div>
         <div class="loading" role="progressbar" aria-label="Spielwelt laden" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <div class="loading-top"><div><span class="eyebrow">WILLKOMMEN AUF NEO V</span><p id="status-text">Verbindung wird hergestellt</p></div><div class="percentage"><span id="progress-label">00</span><span>%</span></div></div>
+          <div class="loading-top"><h1>Willkommen auf NEO V</h1><div class="percentage"><span id="progress-label">00</span><span>%</span></div></div>
           <div class="loading-track"><div id="progress-fill"></div></div>
-          <div class="loading-bottom"><span id="loading-detail">Dein nächstes Kapitel wird geladen.</span><span class="loading-signal" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+          <div class="loading-bottom"><p id="status-text">Verbindung wird hergestellt</p><span id="loading-detail">Du wirst automatisch verbunden.</span></div>
         </div>
       </section>
       <section class="stories" aria-label="Neuigkeiten und Events" aria-roledescription="Karussell">
-        <div class="stories-heading"><h2>Die Stadt steht nicht still.</h2><div class="cycle-info"><span id="cycle-status">Automatisch</span><span id="slide-counter" class="numeral">01 / 04</span></div></div>
+        <div class="stories-heading"><h2>NEUES AUS DER STADT</h2><div class="cycle-info"><span id="cycle-status">Automatisch</span><span id="slide-counter" class="numeral">01 / 04</span></div></div>
         <div class="story-stage" id="story-stage"></div>
         <div class="carousel-bottom"><div class="story-tabs" id="story-tabs" aria-label="Meldung auswählen"></div><div class="carousel-controls"><button id="previous" aria-label="Vorherige Meldung"><span aria-hidden="true">←</span></button><button id="toggle-rotation" aria-label="Automatischen Wechsel pausieren" aria-pressed="false"><span id="pause-glyph" aria-hidden="true">Ⅱ</span></button><button id="next" aria-label="Nächste Meldung"><span aria-hidden="true">→</span></button></div></div>
       </section>
     </main>
     <footer class="social-footer" aria-label="NEO V Social Media">
-      <div class="social-intro"><span class="eyebrow">AUCH AUSSERHALB DER STADT</span><h2>BLEIB VERBUNDEN.</h2></div>
       <nav id="social-links" class="social-links" aria-label="Social-Media-Kanäle"></nav>
     </footer>
   </div>

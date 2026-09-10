@@ -9,7 +9,7 @@ const base = process.env.TEST_URL || 'http://127.0.0.1:4173/html/';
     const page = await browser.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
-    for (const [width, height] of [[1440,900],[1366,768],[1280,720],[1920,1080],[2560,1080],[390,844]]) {
+    for (const [width, height] of [[2560,1440],[1440,900],[1366,768],[1280,720],[1920,1080],[2560,1080],[390,844]]) {
       await page.setViewportSize({ width, height });
       await page.goto(base + '?preview=1');
       await page.evaluate(() => document.fonts.ready);
@@ -18,11 +18,15 @@ const base = process.env.TEST_URL || 'http://127.0.0.1:4173/html/';
         overflow: document.documentElement.scrollWidth > innerWidth,
         vertical: document.documentElement.scrollHeight > innerHeight,
         broken: [...document.images].filter(img => !img.complete || !img.naturalWidth).map(img => img.src),
+        logo: document.querySelector('.brand-logo').naturalWidth > 0,
+        footerClear: document.querySelector('.social-footer').getBoundingClientRect().bottom <= innerHeight - 70,
         mask: getComputedStyle(document.querySelector('.portal-media')).webkitMaskImage
       }));
       assert.equal(metrics.overflow, false, `${width}: horizontal overflow`);
       if (width > 900) assert.equal(metrics.vertical, false, `${width}: vertical overflow`);
       assert.deepEqual(metrics.broken, []);
+      assert.ok(metrics.logo, 'original logo loads');
+      if (width > 900) assert.ok(metrics.footerClear, 'native loading overlay space remains clear');
       assert.match(metrics.mask, /data:image\/svg/);
       await page.screenshot({ path: `/tmp/neov-${width}.png`, fullPage: true });
       for (let index = 0; index < 4; index++) {
@@ -40,11 +44,13 @@ const base = process.env.TEST_URL || 'http://127.0.0.1:4173/html/';
       console.log(`PASS layout and all slides ${width}×${height}`);
     }
     await page.goto(base);
-    assert.equal(await page.locator('.social-link').count(), 4);
-    assert.equal(await page.locator('.social-link').last().textContent(), 'Instagram↗Ein anderer Blickwinkel');
-    await page.locator('.social-link').first().click();
+    assert.equal(await page.locator('.social-link').count(), 5);
+    assert.equal(await page.locator('.social-link').first().getAttribute('href'), 'https://neov.makeitclever.de/');
+    assert.equal(await page.locator('.social-link').last().textContent(), 'Instagram↗');
+    assert.equal(await page.locator('.social-link').nth(1).getAttribute('aria-disabled'), 'true');
+    await page.locator('.social-link').nth(1).dispatchEvent('click');
     assert.equal(page.url(), base, 'placeholder does not navigate or change hash');
-    assert.equal(await page.locator('.social-link').first().getAttribute('href'), '#');
+    assert.equal(await page.locator('.social-link').nth(1).getAttribute('href'), '#');
     await page.waitForTimeout(100);
     assert.equal(await page.locator('#progress-label').textContent(), '00');
     assert.equal(await page.locator('#preview-label').isVisible(), false);

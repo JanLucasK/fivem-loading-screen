@@ -16,33 +16,33 @@ window.NEOV_CONFIG = {
   portal: { image: 'media/life-city.jpg', video: '' },
   stories: [
     {
-      category: 'WILLKOMMEN IN LOS SANTOS', label: 'Dein neues Kapitel',
-      title: ['Das hier wird', 'deine Stadt.'],
-      description: 'Fremde werden Freunde. Aus Momenten werden Geschichten. Und mittendrin: du.',
+      category: 'COMMUNITY', label: 'Community',
+      title: ['Die Community wartet.'],
+      description: 'Neu hier? Lerne die Community auf Discord kennen.',
       image: 'media/life-city.jpg', imageAlt: 'Los Santos bei Nacht mit belebter Strandpromenade',
-      meta: 'DEIN LEBEN. DEINE ENTSCHEIDUNGEN.', footnote: 'Willkommen auf NEO V',
+      meta: 'DEIN LEBEN. DEINE ENTSCHEIDUNGEN.', footnote: 'Mehr im Discord',
       icon: '', logo: ''
     },
     {
-      category: 'COMMUNITY EVENT', label: 'Die Nacht gehört uns',
-      title: ['Nach Sonnenuntergang', 'geht’s erst los.'],
-      description: 'Ein Drink. Neue Gesichter. Eine Nacht, die du nicht geplant hast. Wir sehen uns an der Bar.',
+      category: 'COMMUNITY EVENT', label: 'Nachtleben',
+      title: ['Abends in Los Santos.'],
+      description: 'Entdecke die Bars und Treffpunkte von Los Santos.',
       image: 'media/life-bar.jpg', imageAlt: 'Stimmungsvolle Bar in Los Santos',
       meta: 'NIGHTLIFE · COMMUNITY', footnote: 'Event-Vorschau · Beispielinhalt',
       icon: '', logo: ''
     },
     {
-      category: 'NEUES AUS DER STADT', label: 'Finde deine Leute',
-      title: ['Allein kommst du an.', 'Zusammen weiter.'],
-      description: 'Die besten Geschichten schreibt man gemeinsam. Finde die Menschen, die deine Stadt zu deinem Zuhause machen.',
+      category: 'NEUES AUS DER STADT', label: 'Deine Crew',
+      title: ['Finde deine Crew.'],
+      description: 'Stellt eure Gruppe vor und findet neue Mitspieler.',
       image: 'media/life-crew.jpg', imageAlt: 'Eine Crew unterwegs in Los Santos',
       meta: 'BEGEGNUNGEN · FREUNDSCHAFTEN · ROLEPLAY', footnote: 'Entdecke deine Möglichkeiten',
       icon: '', logo: ''
     },
     {
-      category: 'FRAKTIONEN IM FOKUS', label: 'Mehr als ein Abzeichen',
-      title: ['Deine Entscheidung.', 'Deine Verantwortung.'],
-      description: 'Jede Schicht erzählt eine andere Geschichte. Entdecke das Leben auf der anderen Seite des Funkgeräts.',
+      category: 'FRAKTIONEN IM FOKUS', label: 'Streifendienst',
+      title: ['Einblicke in den Streifendienst.'],
+      description: 'Lerne den Polizeialltag auf NEO V kennen.',
       image: 'media/faction-police.jpg', imageAlt: 'Polizeieinsatz auf den Straßen von Los Santos',
       meta: 'PERSPEKTIVEN · FRAKTIONSLEBEN', footnote: 'Fraktions-Vorschau · Beispielinhalt',
       icon: '', logo: ''

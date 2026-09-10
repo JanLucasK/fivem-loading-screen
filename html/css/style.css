@@ -986,3 +986,414 @@ a.social-link:hover .social-arrow { transform:translate(2px,-2px); }
     transform:none!important
   }
 }
+
+/* Approved compact composition. Keep the runtime carousel and loading effects. */
+.screen,.screen.has-socials {
+  max-width:2100px;
+  height:100dvh;
+  min-height:620px;
+  padding:0 clamp(32px,4vw,90px) 100px;
+  grid-template-rows:100px minmax(0,1fr) 74px
+}
+
+.masthead {
+  justify-content:space-between;
+  border-bottom:1px solid #ffffff0d
+}
+
+.brand-logo {
+  display:block;
+  width:156px;
+  height:auto
+}
+
+.sr-only {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap
+}
+
+.layout {
+  width:100%;
+  max-width:1740px;
+  height:clamp(430px,57vh,720px);
+  margin:auto;
+  padding:0;
+  display:grid;
+  grid-template-columns:minmax(300px,.85fr) minmax(0,1.55fr);
+  gap:clamp(60px,6vw,130px);
+  min-height:0;
+  align-items:stretch
+}
+
+.identity {
+  min-height:0;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  padding:0
+}
+
+.loading-headspace {
+  height:48px;
+  flex-shrink:0
+}
+
+.portal {
+  flex:1 1 0;
+  min-height:0;
+  width:100%;
+  max-width:440px;
+  margin:10px auto 20px
+}
+
+.loading {
+  margin-top:0;
+  flex-shrink:0
+}
+
+.loading-top {
+  align-items:center;
+  gap:20px
+}
+
+.loading-top h1 {
+  font:700 clamp(17px,1.1vw,22px)/1.3 var(--font-display-soft);
+  letter-spacing:-.015em;
+  margin:0
+}
+
+.percentage {
+  font-size:48px;
+  flex-shrink:0
+}
+.percentage>span:last-child {
+  font-size:13px
+}
+
+.loading-track {
+  height:2px;
+  margin:13px 0 15px
+}
+
+.loading-bottom {
+  display:block;
+  margin:0
+}
+.loading-bottom p {
+  font:14px var(--font-ui);
+  color:#c8cbd0;
+  margin:0 0 10px;
+  display:flex;
+  gap:10px;
+  align-items:center
+}
+.loading-bottom p:before {
+  content:'';
+  width:6px;
+  height:6px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:var(--gold-hi)
+}
+
+#loading-detail {
+  display:block;
+  margin-left:16px;
+  font:12px var(--font-ui);
+  color:var(--muted)
+}
+
+.stories {
+  height:100%;
+  min-height:0;
+  grid-template-rows:48px minmax(0,1fr) 66px
+}
+
+.stories-heading {
+  padding-top:9px
+}
+.stories-heading h2 {
+  font:400 11px var(--font-ui);
+  letter-spacing:.12em;
+  color:#aaaeb7
+}
+
+.cycle-info {
+  gap:20px
+}
+#cycle-status {
+  font:11px var(--font-ui)
+}
+.numeral {
+  font-size:12px
+}
+
+.story-image {
+  filter:none;
+  object-position:50% 45%
+}
+.story:after {
+  background:linear-gradient(transparent 20%,#07090de8)
+}
+
+.story-copy {
+  padding:0;
+  left:32px;
+  right:32px;
+  bottom:30px
+}
+.story-category {
+  font-size:10px;
+  letter-spacing:.15em;
+  margin-bottom:12px
+}
+.story-category:before {
+  display:none
+}
+
+.story h3 {
+  font:700 clamp(24px,1.8vw,36px)/1.16 var(--font-display-soft);
+  letter-spacing:-.025em;
+  margin:0 0 12px;
+  text-wrap:pretty
+}
+.story h3 .title-line:last-child {
+  color:var(--text)
+}
+
+.story-description {
+  font-size:14px;
+  line-height:1.5;
+  max-width:560px;
+  margin:0
+}
+
+.story-meta {
+  border:0;
+  padding:0;
+  margin-top:16px;
+  font:12px var(--font-ui);
+  color:var(--gold-hi)
+}
+.story-meta>span:first-child {
+  display:none
+}
+.story-meta>span:last-child {
+  font:inherit;
+  color:inherit;
+  text-align:left
+}
+
+.carousel-bottom {
+  gap:24px;
+  align-items:center
+}
+.story-tabs {
+  align-self:stretch;
+  padding-top:16px;
+  gap:14px
+}
+.story-tab {
+  padding:12px 0 4px;
+  gap:7px
+}
+.story-tab .tab-number {
+  font:11px var(--font-num);
+  padding:0
+}
+.story-tab .tab-title {
+  font:11px/1.3 var(--font-ui)
+}
+.carousel-controls {
+  padding:12px 0 0
+}
+.carousel-controls button {
+  width:30px;
+  height:30px
+}
+
+.social-footer {
+  display:flex;
+  width:100%;
+  max-width:1740px;
+  margin:auto;
+  height:74px;
+  align-items:center;
+  border-top:1px solid #ffffff0d;
+  padding:0 300px 0 0
+}
+
+.social-links {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px
+}
+.social-link {
+  height:36px;
+  padding:0 14px;
+  border:1px solid var(--line);
+  border-radius:4px;
+  justify-content:center;
+  gap:0
+}
+.social-link-top {
+  gap:8px
+}
+.social-name {
+  font:12px var(--font-ui)
+}
+.social-arrow {
+  font:12px var(--font-ui);
+  color:inherit
+}
+.social-link.is-unconfigured {
+  color:#858a93
+}
+.social-link:hover {
+  border-color:var(--gold-hi)
+}
+
+@media(max-height:850px) and (min-width:651px) {
+  .screen,.screen.has-socials {
+  grid-template-rows:80px minmax(0,1fr) 62px;
+  padding-bottom:80px
+}
+.brand-logo {
+  width:134px
+}
+.layout {
+  height:clamp(410px,62vh,530px);
+  gap:65px
+}
+.loading-headspace {
+  height:40px
+}
+.portal {
+  max-width:310px;
+  margin:8px auto 12px
+}
+.loading-top h1 {
+  font-size:17px
+}
+.percentage {
+  font-size:40px
+}
+.loading-bottom p {
+  font-size:13px
+}
+#loading-detail {
+  font-size:11px
+}
+.stories {
+  grid-template-rows:40px minmax(0,1fr) 62px
+}
+.story-copy {
+  left:26px;
+  right:26px;
+  bottom:26px
+}
+.story h3 {
+  font-size:27px
+}
+.social-footer {
+  height:62px
+}
+
+}
+
+@media(max-width:900px) {
+  .layout {
+  gap:35px;
+  grid-template-columns:minmax(240px,.9fr) minmax(0,1.3fr)
+}
+.story h3 {
+  font-size:24px
+}
+.story-description {
+  font-size:13px
+}
+.social-footer {
+  padding-right:0
+}
+.carousel-bottom {
+  gap:12px
+}
+.story-tabs {
+  gap:8px
+}
+.story-tab .tab-number {
+  display:none
+}
+.story-tab .tab-title {
+  font-size:10px
+}
+.carousel-controls {
+  gap:5px
+}
+.carousel-controls button {
+  width:28px;
+  height:28px
+}
+
+}
+
+@media(max-width:650px) {
+  .screen,.screen.has-socials {
+  height:auto;
+  min-height:100dvh;
+  grid-template-rows:80px auto auto;
+  padding-bottom:110px
+}
+.brand-logo {
+  width:134px
+}
+.layout {
+  height:auto;
+  display:flex;
+  flex-direction:column;
+  padding:28px 0;
+  gap:34px
+}
+.identity {
+  height:450px
+}
+.loading-headspace {
+  height:0
+}
+.portal {
+  width:280px
+}
+.loading-top h1 {
+  font-size:18px
+}
+.stories {
+  height:420px;
+  grid-template-rows:36px minmax(0,1fr) 70px
+}
+.story-copy {
+  left:22px;
+  right:22px;
+  bottom:24px
+}
+.story h3 {
+  font-size:25px
+}
+.social-footer {
+  height:auto;
+  min-height:90px;
+  padding:18px 0
+}
+.story-tab .tab-title {
+  font-size:9px
+}
+.cycle-info {
+  gap:10px
+}
+
+}

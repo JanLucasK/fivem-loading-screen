@@ -14,6 +14,8 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 **http://127.0.0.1:4173/html/?preview=1**
 
+Der freigegebene reduzierte Entwurf ist direkt in der Resource umgesetzt; das separate HTML-Mockup wurde entfernt. Originales Kopf-Logo, NV-Ladekontur, integrierter Willkommenstext, kompaktes Werbe-Carousel und Homepage-/Social-Buttons bilden die Oberfläche. Unten bleiben auf Desktop mindestens 80 Pixel für native GTA-Ladeanzeigen frei.
+
 Die Vorschau startet mit 37 % und simuliert den Fortschritt bis 94 %. Sie ist nur auf localhost, 127.0.0.1 oder bei lokal geöffneten Dateien aktiv. Ohne Parameter wartet der Screen auf echte FiveM-Nachrichten. Zum zuverlässigen Testen den HTTP-Server verwenden.
 
 ## Installation
@@ -28,7 +30,7 @@ setr sv_showBusySpinnerOnLoadingScreen false
 
 3. Resource neu starten und neu verbinden. Der Loadingscreen erscheint beim Verbinden.
 
-`fxmanifest.lua` liefert HTML, CSS, JavaScript, Fonts und alle Dateien unter `html/media/` aus. Der Cursor ist aktiviert. Das Original-Logo ist als SVG-Kontur im HTML und als SVG-Daten-URI in `html/css/brand.css` eingebettet: Die bestehende Absicherung gegen fehlende Logo-Dateien bleibt erhalten. Neue Bilder und Videos werden regulär als Resource-Dateien ausgeliefert; das muss beim ersten Server-Test mit geprüft werden.
+`fxmanifest.lua` liefert HTML, CSS, JavaScript, Fonts, `assets/neologokompakt.png` und alle Dateien unter `html/media/` aus. Der Cursor ist aktiviert. Das Original-Logo ist als SVG-Kontur im HTML und als SVG-Daten-URI in `html/css/brand.css` eingebettet: Die bestehende Absicherung gegen fehlende Logo-Dateien bleibt erhalten. Neue Bilder und Videos werden regulär als Resource-Dateien ausgeliefert; das muss beim ersten Server-Test mit geprüft werden.
 
 ## Inhalte pflegen
 
@@ -86,7 +88,7 @@ socials: [
 ]
 ```
 
-`socials: []` blendet die Leiste aus. Leere oder ungültige Ziele erscheinen nur in der Design-Vorschau als nicht klickbare Einträge. Auf Desktop reserviert die Leiste 100–150 Pixel Höhe; mobil werden die Kanäle in zwei Spalten angezeigt.
+`socials: []` blendet die Social-Kanäle aus; eine konfigurierte Homepage bleibt erreichbar. Ohne Homepage und Social-Kanäle wird die Leiste ausgeblendet. Leere oder ungültige Ziele erscheinen nur in der Design-Vorschau als nicht klickbare Einträge. Auf Desktop ist die Buttonleiste 62–74 Pixel hoch; auf schmalen Bildschirmen brechen die Buttons um. Die Homepage ist der erste Button und wird über `homepage` konfiguriert.
 
 ## Fontdisziplin und Bewegung
 
@@ -118,7 +120,7 @@ Desktop: linkes Drittel für Marke und Laden, rechte zwei Drittel für Meldungen
 
 ## Browserprüfung
 
-`tests/browser.cjs` prüft sechs Bildschirmgrößen, alle Beispielmeldungen, fehlende Medien, leere Konfiguration, Schriftrollen, Tastatur, Pause/Fortsetzen mit verbleibendem Mausfokus, automatischen Wechsel mit Hover, Timer-Neustart, vollständigen Umlauf, schnelle Mehrfachwechsel, reduzierte Bewegung, Ladeereignisse und einmaligen Shutdown. Der Vorschau-Server muss laufen.
+`tests/browser.cjs` prüft sieben Bildschirmgrößen, alle Beispielmeldungen, fehlende Medien, leere Konfiguration, Schriftrollen, Tastatur, Pause/Fortsetzen mit verbleibendem Mausfokus, automatischen Wechsel mit Hover, Timer-Neustart, vollständigen Umlauf, schnelle Mehrfachwechsel, reduzierte Bewegung, Ladeereignisse und einmaligen Shutdown. Der Vorschau-Server muss laufen.
 
 Mit einer vorhandenen Playwright-Installation:
 
@@ -133,3 +135,11 @@ PLAYWRIGHT_MODULE=/pfad/zu/playwright CHROMIUM_PATH=/pfad/zu/chromium node tests
 ```
 
 Screenshots landen unter `/tmp/neov-<breite>.png`. `TEST_URL` kann eine andere lokale Vorschau-Adresse setzen. Ein echter FiveM-Join, Resource-Download und Übergang zur Charakterauswahl müssen zusätzlich im Spiel geprüft werden.
+
+## Änderungen am reduzierten Loadingscreen
+
+- Überlagerung der unteren Links durch native GTA-Ladeanzeigen: eigener freier Bereich unter der kompakten Buttonleiste; Homepage links statt unten rechts.
+- Originales `neologokompakt.png` statt nachgebauter Wortmarke, explizit im Resource-Manifest ausgeliefert.
+- Willkommenstext direkt am Ladefortschritt; doppelte Slogans und große Social-Blöcke entfernt.
+- Kleineres Werbe-Carousel mit kurzen Texten; beschriftete Zeitsegmente, Pause, Tastatursteuerung und native Lade-/Shutdown-Ereignisse bleiben erhalten.
+- Browserprüfung deckt zusätzlich das Original-Logo, Homepage-Ziel und den freien unteren Bereich ab. Echte GTA-Overlay-Ausmaße und der Join bleiben im Spiel zu prüfen.

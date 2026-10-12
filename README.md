@@ -116,11 +116,11 @@ API-Grundlage: [Cfx-Dokumentation zu Loading Screens](https://docs.fivem.net/doc
 
 ## Darstellung und Barrierefreiheit
 
-Desktop: linkes Drittel für Marke und Laden, rechte zwei Drittel für Meldungen. Auf schmalen Bildschirmen stapeln sich die Flächen. Ultrawide wird bis 2560 Pixel Inhaltsbreite unterstützt. Reduzierte Animationen deaktivieren Kamerafahrten und initial die automatische Rotation; manuelle Navigation bleibt möglich. Versteckte Browser-Tabs pausieren Rendering und Video. Sichtbarer Tastaturfokus und semantischer Fortschrittsbalken sind enthalten.
+Desktop: linkes Drittel für Marke und Laden, rechte zwei Drittel für Meldungen. Oberhalb von 1920 × 1080 skaliert die gesamte Komposition mit der kleineren der beiden Auflösungsrelationen: 2560 × 1440 mit Faktor 1,33, 3840 × 2160 mit Faktor 2. Schriften, Logos, Bedienelemente, Inhaltsgrenzen und der freie untere Bereich wachsen gemeinsam. Ultrawide richtet die Skalierung nach der Höhe aus und begrenzt die Inhaltsbreite proportional. Kleinere Auflösungen behalten ihre bisherigen Größen und Umbrüche; auf schmalen Bildschirmen stapeln sich die Flächen. Reduzierte Animationen deaktivieren Kamerafahrten und initial die automatische Rotation; manuelle Navigation bleibt möglich. Versteckte Browser-Tabs pausieren Rendering und Video. Sichtbarer Tastaturfokus und semantischer Fortschrittsbalken sind enthalten.
 
 ## Browserprüfung
 
-`tests/browser.cjs` prüft sieben Bildschirmgrößen, alle Beispielmeldungen, fehlende Medien, leere Konfiguration, Schriftrollen, Tastatur, Pause/Fortsetzen mit verbleibendem Mausfokus, automatischen Wechsel mit Hover, Timer-Neustart, vollständigen Umlauf, schnelle Mehrfachwechsel, reduzierte Bewegung, Ladeereignisse und einmaligen Shutdown. Der Vorschau-Server muss laufen.
+`tests/browser.cjs` prüft zehn Bildschirmgrößen einschließlich 1440p, 4K und Ultrawide bis 5120 × 1440. Größen und Schriftgrößen werden zusätzlich mit Full HD verglichen, damit eine zu kleine Oberfläche auch ohne Überlauf auffällt. Weitere Prüfungen decken alle Beispielmeldungen, fehlende Medien, leere Konfiguration, Schriftrollen, Tastatur, Pause/Fortsetzen mit verbleibendem Mausfokus, automatischen Wechsel mit Hover, Timer-Neustart, vollständigen Umlauf, schnelle Mehrfachwechsel, reduzierte Bewegung, Ladeereignisse und einmaligen Shutdown ab. Der Vorschau-Server muss laufen.
 
 Mit einer vorhandenen Playwright-Installation:
 
@@ -134,7 +134,7 @@ Alternativ den Modulpfad und optional den Browserpfad angeben:
 PLAYWRIGHT_MODULE=/pfad/zu/playwright CHROMIUM_PATH=/pfad/zu/chromium node tests/browser.cjs
 ```
 
-Screenshots landen unter `/tmp/neov-<breite>.png`. `TEST_URL` kann eine andere lokale Vorschau-Adresse setzen. Ein echter FiveM-Join, Resource-Download und Übergang zur Charakterauswahl müssen zusätzlich im Spiel geprüft werden.
+Screenshots landen unter `/tmp/neov-<breite>x<hoehe>.png`. `TEST_URL` kann eine andere lokale Vorschau-Adresse setzen. Ein echter FiveM-Join, Resource-Download und Übergang zur Charakterauswahl müssen zusätzlich im Spiel geprüft werden.
 
 ## Änderungen am reduzierten Loadingscreen
 

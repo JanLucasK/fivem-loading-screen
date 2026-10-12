@@ -9,7 +9,8 @@ const base = process.env.TEST_URL || 'http://127.0.0.1:4173/html/';
     const page = await browser.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
-    for (const [width, height] of [[2560,1440],[1440,900],[1366,768],[1280,720],[1920,1080],[2560,1080],[390,844]]) {
+    let fullHdMetrics;
+    for (const [width, height] of [[1920,1080],[2560,1440],[3840,2160],[3440,1440],[5120,1440],[1440,900],[1366,768],[1280,720],[2560,1080],[390,844]]) {
       await page.setViewportSize({ width, height });
       await page.goto(base + '?preview=1');
       await page.evaluate(() => document.fonts.ready);
@@ -20,6 +21,12 @@ const base = process.env.TEST_URL || 'http://127.0.0.1:4173/html/';
         broken: [...document.images].filter(img => !img.complete || !img.naturalWidth).map(img => img.src),
         logo: document.querySelector('.brand-logo').naturalWidth > 0,
         footerClear: document.querySelector('.social-footer').getBoundingClientRect().bottom <= innerHeight - 70,
+        composition: Object.fromEntries(['.layout', '.brand-logo', '.portal', '.social-link', '.carousel-controls button'].map(selector => {
+          const { width, height } = document.querySelector(selector).getBoundingClientRect();
+          return [selector, { width, height }];
+        })),
+        fontSizes: Object.fromEntries(['.loading-top h1', '.percentage', '#loading-detail', '.story h3', '.story-description', '.story-tab .tab-title', '.social-name'].map(selector =>
+          [selector, parseFloat(getComputedStyle(document.querySelector(selector)).fontSize)])),
         mask: getComputedStyle(document.querySelector('.portal-media')).webkitMaskImage
       }));
       assert.equal(metrics.overflow, false, `${width}: horizontal overflow`);
@@ -28,7 +35,23 @@ const base = process.env.TEST_URL || 'http://127.0.0.1:4173/html/';
       assert.ok(metrics.logo, 'original logo loads');
       if (width > 900) assert.ok(metrics.footerClear, 'native loading overlay space remains clear');
       assert.match(metrics.mask, /data:image\/svg/);
-      await page.screenshot({ path: `/tmp/neov-${width}.png`, fullPage: true });
+      if (width === 1920 && height === 1080) fullHdMetrics = metrics;
+      if (width >= 1920 && height >= 1080) {
+        const scale = Math.min(width / 1920, height / 1080);
+        for (const [selector, dimensions] of Object.entries(metrics.composition)) {
+          for (const axis of ['width', 'height']) {
+            assert.ok(dimensions[axis] >= fullHdMetrics.composition[selector][axis] * scale - 1,
+              `${width}x${height}: ${selector} ${axis} remains too small`);
+          }
+        }
+        for (const [selector, fontSize] of Object.entries(metrics.fontSizes)) {
+          assert.ok(fontSize >= fullHdMetrics.fontSizes[selector] * scale - .1,
+            `${width}x${height}: ${selector} text remains too small`);
+        }
+        assert.ok(metrics.composition['.layout'].height <= height * .6,
+          `${width}x${height}: compact composition grows beyond its intended height`);
+      }
+      await page.screenshot({ path: `/tmp/neov-${width}x${height}.png`, fullPage: true });
       for (let index = 0; index < 4; index++) {
         await page.locator('.story-tab').nth(index).click();
         await page.waitForTimeout(900);
